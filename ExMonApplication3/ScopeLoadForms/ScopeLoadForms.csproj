@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F0A2188C-8E21-4248-8CCA-792AC800DD47}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ScopeLoadForms</RootNamespace>
+    <AssemblyName>ScopeLoadForms</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AskScopeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AskScopeForm.Designer.cs">
+      <DependentUpon>AskScopeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadOscDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadOscDataForm.Designer.cs">
+      <DependentUpon>LoadOscDataForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadScopeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadScopeForm.Designer.cs">
+      <DependentUpon>LoadScopeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ScopeConfig.cs" />
+    <Compile Include="ScopeConfigLoader.cs" />
+    <Compile Include="ScopeDialogResults.cs" />
+    <Compile Include="ScopeFile.cs" />
+    <Compile Include="ScopeLoader.cs" />
+    <Compile Include="ScopeSetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScopeSetupForm.designer.cs">
+      <DependentUpon>ScopeSetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ScopeStatusesLoader.cs" />
+    <Compile Include="ScopeSysType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AskScopeForm.resx">
+      <DependentUpon>AskScopeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadOscDataForm.resx">
+      <DependentUpon>LoadOscDataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadScopeForm.resx">
+      <DependentUpon>LoadScopeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScopeSetupForm.resx">
+      <DependentUpon>ScopeSetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\FormatsConvert\FormatsConvert.csproj">
+      <Project>{5FCCE3A4-27ED-4D6F-910E-05476B4DFA9B}</Project>
+      <Name>FormatsConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TextLibrary\TextLibrary.csproj">
+      <Project>{001154ED-D160-47C2-B8A1-9738F25A5B32}</Project>
+      <Name>TextLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UniSerialPort\UniSerialPort.csproj">
+      <Project>{A98B5E88-C666-4B1C-95E9-2CA1C74E7F96}</Project>
+      <Name>UniSerialPort</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\advancedsettings_3297.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recordpressed_2883.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

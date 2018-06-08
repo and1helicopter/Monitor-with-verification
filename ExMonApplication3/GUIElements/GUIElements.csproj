@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4C656344-B643-42CF-9FF1-6B20AA9004A6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GUIElements</RootNamespace>
+    <AssemblyName>GUIElements</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApplyForm.Designer.cs">
+      <DependentUpon>ApplyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DigitPanelScroll.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DigitPanelScroll.Designer.cs">
+      <DependentUpon>DigitPanelScroll.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DigitPanelBig.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DigitPanelBig.Designer.cs">
+      <DependentUpon>DigitPanelBig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DigitPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DigitPanel.Designer.cs">
+      <DependentUpon>DigitPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InputValueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputValueForm.Designer.cs">
+      <DependentUpon>InputValueForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InputValueFormModes.cs" />
+    <Compile Include="InputValueFormSettings.cs" />
+    <Compile Include="LabelButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LabelButton.Designer.cs">
+      <DependentUpon>LabelButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MeasureParamPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MeasureParamPanel.Designer.cs">
+      <DependentUpon>MeasureParamPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MessageForm.Designer.cs">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MessageWindowForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MessageWindowForms.Designer.cs">
+      <DependentUpon>MessageWindowForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SelectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectForm.Designer.cs">
+      <DependentUpon>SelectForm.cs</DependentUpon>
+    </Compile>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ApplyForm.resx">
+      <DependentUpon>ApplyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DigitPanelScroll.resx">
+      <DependentUpon>DigitPanelScroll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DigitPanelBig.resx">
+      <DependentUpon>DigitPanelBig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DigitPanel.resx">
+      <DependentUpon>DigitPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputValueForm.resx">
+      <DependentUpon>InputValueForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LabelButton.resx">
+      <DependentUpon>LabelButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MeasureParamPanel.resx">
+      <DependentUpon>MeasureParamPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MessageForm.resx">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MessageWindowForms.resx">
+      <DependentUpon>MessageWindowForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectForm.resx">
+      <DependentUpon>SelectForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\FormatsConvert\FormatsConvert.csproj">
+      <Project>{5FCCE3A4-27ED-4D6F-910E-05476B4DFA9B}</Project>
+      <Name>FormatsConvert</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_remove_3813.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_remove_5202.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\apply_8891.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_cancel_4476.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clear-left_2380.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\old-view-refresh_3470.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

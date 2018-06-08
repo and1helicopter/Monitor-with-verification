@@ -1,0 +1,13 @@
+bin/
+obj/
+RUN/
+*.dll
+*.pdb
+*.7z
+*.doc
+*.exe
+*.zip
+*.ide-wal
+*.ide-shm
+*.ide
+*.lock

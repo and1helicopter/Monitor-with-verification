@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DFA041EE-E5EF-4848-9545-F8E5274010CF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WindowsStructs</RootNamespace>
+    <AssemblyName>WindowsStructs</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Basic16BitSelect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Basic16BitSelect.Designer.cs">
+      <DependentUpon>Basic16BitSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DigitPlate.cs" />
+    <Compile Include="DigitPlateConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DigitPlateConfigForm.Designer.cs">
+      <DependentUpon>DigitPlateConfigForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DigitPlateSelect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DigitPlateSelect.Designer.cs">
+      <DependentUpon>DigitPlateSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DigitPlateSetup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DigitPlateSetup.Designer.cs">
+      <DependentUpon>DigitPlateSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DigitPlateSetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DigitPlateSetupForm.Designer.cs">
+      <DependentUpon>DigitPlateSetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DigitType.cs" />
+    <Compile Include="EventCodesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventCodesForm.Designer.cs">
+      <DependentUpon>EventCodesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MeasureParam.cs" />
+    <Compile Include="MeasureParamsSetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MeasureParamsSetupForm.Designer.cs">
+      <DependentUpon>MeasureParamsSetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OtherParamsForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OtherParamsForms.Designer.cs">
+      <DependentUpon>OtherParamsForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration.cs" />
+    <Compile Include="SystemConfiguratorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SystemConfiguratorForm.Designer.cs">
+      <DependentUpon>SystemConfiguratorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TimeConfig.cs" />
+    <Compile Include="TimeConfiguratorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TimeConfiguratorForm.Designer.cs">
+      <DependentUpon>TimeConfiguratorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TimeFormats.cs" />
+    <Compile Include="WarningConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarningConfigForm.Designer.cs">
+      <DependentUpon>WarningConfigForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarningSelect2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WarningSelect2.Designer.cs">
+      <DependentUpon>WarningSelect2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarningSetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarningSetupForm.Designer.cs">
+      <DependentUpon>WarningSetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarningParam.cs" />
+    <Compile Include="WarningSetup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WarningSetup.Designer.cs">
+      <DependentUpon>WarningSetup.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Basic16BitSelect.resx">
+      <DependentUpon>Basic16BitSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DigitPlateConfigForm.resx">
+      <DependentUpon>DigitPlateConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DigitPlateSelect.resx">
+      <DependentUpon>DigitPlateSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DigitPlateSetup.resx">
+      <DependentUpon>DigitPlateSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DigitPlateSetupForm.resx">
+      <DependentUpon>DigitPlateSetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventCodesForm.resx">
+      <DependentUpon>EventCodesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MeasureParamsSetupForm.resx">
+      <DependentUpon>MeasureParamsSetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OtherParamsForms.resx">
+      <DependentUpon>OtherParamsForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SystemConfiguratorForm.resx">
+      <DependentUpon>SystemConfiguratorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimeConfiguratorForm.resx">
+      <DependentUpon>TimeConfiguratorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarningConfigForm.resx">
+      <DependentUpon>WarningConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarningSelect2.resx">
+      <DependentUpon>WarningSelect2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarningSetup.resx">
+      <DependentUpon>WarningSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarningSetupForm.resx">
+      <DependentUpon>WarningSetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_7609.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus__orange_4585.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok_4020.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_cancel_1986.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\binary_6007.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\FormatsConvert\FormatsConvert.csproj">
+      <Project>{5FCCE3A4-27ED-4D6F-910E-05476B4DFA9B}</Project>
+      <Name>FormatsConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SerialPorts\SerialPorts.csproj">
+      <Project>{56520dcf-d9fb-4fcc-b230-2af44d1a17dc}</Project>
+      <Name>SerialPorts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TextLibrary\TextLibrary.csproj">
+      <Project>{001154ED-D160-47C2-B8A1-9738F25A5B32}</Project>
+      <Name>TextLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UniSerialPort\UniSerialPort.csproj">
+      <Project>{A98B5E88-C666-4B1C-95E9-2CA1C74E7F96}</Project>
+      <Name>UniSerialPort</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GUIElements\GUIElements.csproj">
+      <Project>{4C656344-B643-42CF-9FF1-6B20AA9004A6}</Project>
+      <Name>GUIElements</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_blue_open_1278.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filesaveas_1153.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\xclock_7308.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clock_8356.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\binary_1556.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_text_3644.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\alert_1432.ico" />
+    <None Include="Resources\page_white_lightning_6386.ico" />
+    <None Include="Resources\flag-32_6963.ico" />
+    <None Include="Resources\binary_6516.ico" />
+    <None Include="Resources\block2_7748.ico" />
+    <Content Include="Resources\xclock_8515.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

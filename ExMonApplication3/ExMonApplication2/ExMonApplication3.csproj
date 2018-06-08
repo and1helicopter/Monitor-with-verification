@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{65A9084E-7D62-47E2-B682-4F68B2BA5AD4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ExMonApplication3</RootNamespace>
+    <AssemblyName>ExMonApplication3</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>kcmmemory_8580.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ComSetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComSetForm.Designer.cs">
+      <DependentUpon>ComSetForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FloatDirectAccessForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FloatDirectAccessForm.Designer.cs">
+      <DependentUpon>FloatDirectAccessForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextsParams.cs" />
+    <Compile Include="VerificationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VerificationForm.Designer.cs">
+      <DependentUpon>VerificationForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ComSetForm.resx">
+      <DependentUpon>ComSetForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FloatDirectAccessForm.resx">
+      <DependentUpon>FloatDirectAccessForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="VerificationForm.resx">
+      <DependentUpon>VerificationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\FormatsConvert\FormatsConvert.csproj">
+      <Project>{5FCCE3A4-27ED-4D6F-910E-05476B4DFA9B}</Project>
+      <Name>FormatsConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SerialPorts\SerialPorts.csproj">
+      <Project>{56520dcf-d9fb-4fcc-b230-2af44d1a17dc}</Project>
+      <Name>SerialPorts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TextLibrary\TextLibrary.csproj">
+      <Project>{001154ED-D160-47C2-B8A1-9738F25A5B32}</Project>
+      <Name>TextLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UniSerialPort\UniSerialPort.csproj">
+      <Project>{A98B5E88-C666-4B1C-95E9-2CA1C74E7F96}</Project>
+      <Name>UniSerialPort</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GUIElements\GUIElements.csproj">
+      <Project>{4C656344-B643-42CF-9FF1-6B20AA9004A6}</Project>
+      <Name>GUIElements</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScopeLoadForms\ScopeLoadForms.csproj">
+      <Project>{F0A2188C-8E21-4248-8CCA-792AC800DD47}</Project>
+      <Name>ScopeLoadForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StandartScreens\StandartScreens.csproj">
+      <Project>{C7E5A581-E925-4499-9C6F-1B22F63C5C82}</Project>
+      <Name>StandartScreens</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WindowsStructs\WindowsStructs.csproj">
+      <Project>{DFA041EE-E5EF-4848-9545-F8E5274010CF}</Project>
+      <Name>WindowsStructs</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kcmmemory_8580.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CONNECT.ICO" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\disconnect.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_remove_5094.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_remove_5202.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\advancedsettings_3297.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\advancedsettings_8664.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\accessories-text-editor_1790.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smart_media_unmount_3667.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smart_media_unmount_8501.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_blue_open_1278.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_blue_open_9731.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\xclock_7308.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_right_48_5613.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forward_9124.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forward_91241.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok_4020.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_cancel_1986.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\viewmagfit_8658.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\messagebox_critical_2492.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_ok_8097.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filesave_6944.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\network-config_6055.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\utilities-system-monitor_9425.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\archive_3355.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="kcmmemory_8580.ico" />
+    <None Include="Resources\binary_6516.ico" />
+    <Content Include="Resources\jog.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
