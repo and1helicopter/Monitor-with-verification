@@ -84,7 +84,7 @@ namespace ExMonApplication2
             serialPort.GetDataRTU(Addr, 2, ReadDataRecieved);
         }
 
-        private void ReadDataRecieved(bool DataOk, ushort[] ParamRTU)
+        private void ReadDataRecieved(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (InvokeRequired)
             {
@@ -116,7 +116,7 @@ namespace ExMonApplication2
             }
         }
 
-        private void WriteDataRecieved(bool DataOk, ushort[] ParamRTU)
+        private void WriteDataRecieved(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (InvokeRequired)
             {

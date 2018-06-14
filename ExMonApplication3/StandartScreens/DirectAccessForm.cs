@@ -123,11 +123,11 @@ namespace StandartScreens
             portBusy = true;
             serialPort.SetDataRTU(addr, WriteDataRecieved, RequestPriority.Normal, value); 
         }
-        private void WriteDataRecieved(bool DataOk, ushort[] ParamRTU)
+        private void WriteDataRecieved(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (InvokeRequired)
             {
-                Invoke(new AsynchSerialPort.DataRecievedRTU(WriteDataRecieved), DataOk, ParamRTU);
+                Invoke(new AsynchSerialPort.DataRecievedRTU(WriteDataRecieved), DataOk, ParamRTU, null);
             }
             else
             {
@@ -162,11 +162,11 @@ namespace StandartScreens
             portBusy = true;
             serialPort.GetDataRTU(addr, 1, ReadDataRecieved);
         }
-        private void ReadDataRecieved(bool DataOk, ushort[] ParamRTU)
+        private void ReadDataRecieved(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (InvokeRequired)
             {
-                Invoke(new AsynchSerialPort.DataRecievedRTU(ReadDataRecieved), DataOk, ParamRTU);
+                Invoke(new AsynchSerialPort.DataRecievedRTU(ReadDataRecieved), DataOk, ParamRTU, null);
             }
             else
             {

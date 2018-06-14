@@ -60,7 +60,7 @@ namespace StandartScreens
             backgroundWorker.RunWorkerAsync(null);
         }
 
-        private void serialPort_DataReceived(bool DataOk, ushort[] ParamRTU)
+        private void serialPort_DataReceived(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (!DataOk)
             {
@@ -69,7 +69,7 @@ namespace StandartScreens
             waitResponce.Set();
         }
 
-        private void serialPort_LoadDataReceived(bool DataOk, ushort[] ParamRTU)
+        private void serialPort_LoadDataReceived(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (DataOk)
             {

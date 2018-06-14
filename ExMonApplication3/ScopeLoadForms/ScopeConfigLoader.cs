@@ -97,7 +97,7 @@ namespace ScopeLoadForms
             e.Result = true;
         }
 
-        void LoadConfigRecieveOne(bool DataOk, ushort[] ParamRTU)
+        void LoadConfigRecieveOne(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (DataOk)
             {
@@ -110,7 +110,7 @@ namespace ScopeLoadForms
             waitResponce.Set();
         }
 
-        void LoadConfigRecieveTwo(bool DataOk, ushort[] ParamRTU)
+        void LoadConfigRecieveTwo(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (DataOk)
             {
@@ -123,7 +123,7 @@ namespace ScopeLoadForms
             waitResponce.Set();
         }
 
-        void LoadConfigRecieveThree(bool DataOk, ushort[] ParamRTU)
+        void LoadConfigRecieveThree(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (DataOk)
             {
@@ -136,7 +136,7 @@ namespace ScopeLoadForms
             waitResponce.Set();
         }
 
-        void LoadConfigRecieveFour(bool DataOk, ushort[] ParamRTU)
+        void LoadConfigRecieveFour(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (DataOk)
             {
@@ -157,7 +157,7 @@ namespace ScopeLoadForms
             waitResponce.Set();
         }
 
-        void LoadConfigRecieveFive(bool DataOk, ushort[] ParamRTU)
+        void LoadConfigRecieveFive(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (DataOk)
             {

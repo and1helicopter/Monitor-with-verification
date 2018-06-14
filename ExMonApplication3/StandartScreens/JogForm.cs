@@ -105,11 +105,11 @@ namespace StandartScreens
             serialPort.SetDataRTU(0x015F, WriteDataRecieved, RequestPriority.Normal, w);
         }
 
-        private void WriteDataRecieved(bool DataOk, ushort[] ParamRTU)
+        private void WriteDataRecieved(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (InvokeRequired)
             {
-                Invoke(new AsynchSerialPort.DataRecievedRTU(WriteDataRecieved), DataOk, ParamRTU);
+                Invoke(new AsynchSerialPort.DataRecievedRTU(WriteDataRecieved), DataOk, ParamRTU, null);
             }
             else
             {
@@ -136,11 +136,11 @@ namespace StandartScreens
         //***************************ЧТЕНИЕ ДАННЫХ****************************************************************//
         //********************************************************************************************************//
         
-        private void ReadDataRecieved(bool DataOk, ushort[] ParamRTU)
+        private void ReadDataRecieved(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (InvokeRequired)
             {
-                Invoke(new AsynchSerialPort.DataRecievedRTU(ReadDataRecieved), DataOk, ParamRTU);
+                Invoke(new AsynchSerialPort.DataRecievedRTU(ReadDataRecieved), DataOk, ParamRTU, null);
             }
             else
             {

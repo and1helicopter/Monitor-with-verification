@@ -548,7 +548,7 @@ namespace ScopeLoadForms
         }
 
         //public void EndRequest(object sender, EventArgs e)
-        void EndWriteConfig(bool DataOk, ushort[] ParamRTU)
+        void EndWriteConfig(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (!DataOk)
             {

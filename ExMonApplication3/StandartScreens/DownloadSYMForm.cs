@@ -124,11 +124,11 @@ namespace StandartScreens
                 button1.Enabled = button2.Enabled = button3.Enabled = true;
             }
         }
-        private void ReadDataRecieved(bool DataOk, ushort[] ParamRTU)
+        private void ReadDataRecieved(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (InvokeRequired)
             {
-                Invoke(new AsynchSerialPort.DataRecievedRTU(ReadDataRecieved), DataOk, ParamRTU); 
+                Invoke(new AsynchSerialPort.DataRecievedRTU(ReadDataRecieved), DataOk, ParamRTU, null); 
             }
             else
             {
@@ -361,11 +361,11 @@ namespace StandartScreens
             Array.Copy(systemProfile, loadIndex * 16, writePartBuffer, 0, 16);
             serialPort.SetDataRTU((ushort)(startAddr + loadIndex * 16), WriteDataRecieved, RequestPriority.Normal, writePartBuffer);
         }
-        private void WriteDataRecieved(bool DataOk, ushort[] ParamRTU)
+        private void WriteDataRecieved(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (InvokeRequired)
             {
-                Invoke(new AsynchSerialPort.DataRecievedRTU(WriteDataRecieved), DataOk, ParamRTU);
+                Invoke(new AsynchSerialPort.DataRecievedRTU(WriteDataRecieved), DataOk, ParamRTU, null);
             }
             else
             {

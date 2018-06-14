@@ -14,6 +14,7 @@ namespace UniSerialPort
         public int ReceivedBytesThreshold;
         public PortAnswerType PortAnswerType;
         public int RTUReadCount { get; set; }
+        public object Param { get; set; }
 
         public RequestUnit(byte[] txBuffer, int receivedBytesThreshold, AsynchSerialPort.DataRecieved dataRecieved)
         {
@@ -23,13 +24,14 @@ namespace UniSerialPort
             PortAnswerType = PortAnswerType.Byte;
             RTUReadCount = 0;
         }
-        public RequestUnit(byte[] txBuffer, int receivedBytesThreshold, AsynchSerialPort.DataRecievedRTU dataRecievedRTU, int rtuReadCount)
+        public RequestUnit(byte[] txBuffer, int receivedBytesThreshold, AsynchSerialPort.DataRecievedRTU dataRecievedRTU, int rtuReadCount, object param)
         {
             DataRecievedRTU = dataRecievedRTU;
             TxBuffer = txBuffer;
             ReceivedBytesThreshold = receivedBytesThreshold;
             PortAnswerType = PortAnswerType.RTU;
             RTUReadCount = rtuReadCount;
+            Param = param;
         }
 
         public byte GetSlaveAddr()

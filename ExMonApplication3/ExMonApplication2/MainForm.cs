@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using WindowsStructs;
-using FormatsConvert;
-using System.IO.Ports;
 using UniSerialPort;
-using System.Runtime.InteropServices;
-using SerialPorts;
 using TextLibrary;
 using ScopeLoadForms;
 using StandartScreens;
@@ -194,13 +186,13 @@ namespace ExMonApplication2
             if (timeRequestNow) { return; }
             TimeConfig.SendReadTimeRequest(serialPort, TimeRecieved, systemConfiguration.TimeConfig);
         }
-        private void TimeRecieved(bool DataOk, ushort[] ParamRTU)
+        private void TimeRecieved(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (this.InvokeRequired)
             {
                 try
                 {
-                    Invoke(new AsynchSerialPort.DataRecievedRTU(TimeRecieved), DataOk, ParamRTU);
+                    Invoke(new AsynchSerialPort.DataRecievedRTU(TimeRecieved), DataOk, ParamRTU, null);
                 }
                 catch
                 {
@@ -307,6 +299,7 @@ namespace ExMonApplication2
             directBtn.Enabled = EnableForms;
             directFloatBtn.Enabled = EnableForms;
             loadSYMBtn.Enabled = EnableForms;
+            verificationlabelButton.Enabled = EnableForms;
             digInComboBox.Enabled = digInBtn.Enabled = EnableForms & (digInModuls.Count > 0);
             digOutComboBox.Enabled = digOutBtn.Enabled = EnableForms & (digOutModuls.Count > 0);
             setClockBtn.Enabled = EnableForms;

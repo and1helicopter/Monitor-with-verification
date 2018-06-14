@@ -127,7 +127,7 @@ namespace ScopeLoadForms
             e.Result = true;
         }
 
-        void UpdateTimeStamp(bool DataOk, ushort[] ParamRTU)
+        void UpdateTimeStamp(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (!DataOk)
             {
@@ -146,7 +146,7 @@ namespace ScopeLoadForms
             waitResponce.Set();
         }
 
-        void EndLoadStatuses(bool DataOk, ushort[] ParamRTU)
+        void EndLoadStatuses(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (!DataOk)
             {

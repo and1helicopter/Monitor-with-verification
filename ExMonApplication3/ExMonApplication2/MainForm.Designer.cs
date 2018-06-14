@@ -453,7 +453,7 @@
             // 
             this.verificationlabelButton.ButtonColor = System.Drawing.SystemColors.Control;
             this.verificationlabelButton.ButtonMargin = new System.Windows.Forms.Padding(3);
-            this.verificationlabelButton.Image = global::ExMonApplication3.Properties.Resources.binary_6516;
+            this.verificationlabelButton.Image = global::ExMonApplication3.Properties.Resources.verification;
             this.verificationlabelButton.Location = new System.Drawing.Point(80, 129);
             this.verificationlabelButton.Margin = new System.Windows.Forms.Padding(4);
             this.verificationlabelButton.Name = "verificationlabelButton";

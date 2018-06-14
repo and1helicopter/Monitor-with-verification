@@ -129,7 +129,7 @@ namespace ScopeLoadForms
             e.Result = true;
         }
 
-        void EndLoadStepOne(bool DataOk, ushort[] ParamRTU)
+        void EndLoadStepOne(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (!DataOk)
             {
@@ -142,7 +142,7 @@ namespace ScopeLoadForms
             SendSecondRequest();
         }
 
-        void EndLoadStepTwo(bool DataOk, ushort[] ParamRTU)
+        void EndLoadStepTwo(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (!DataOk)
             {
@@ -153,7 +153,7 @@ namespace ScopeLoadForms
             serialPort.GetDataRTU(ScopeSysType.ParamLoadDataAddr, 32, EndLoadStepThree, requestPriority);
         }
 
-        void EndLoadStepThree(bool DataOk, ushort[] ParamRTU)
+        void EndLoadStepThree(bool DataOk, ushort[] ParamRTU, object param)
         {
             if (!DataOk)
             {

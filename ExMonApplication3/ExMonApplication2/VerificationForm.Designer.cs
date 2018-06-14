@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -45,6 +45,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label2 = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChanneldataGridView)).BeginInit();
@@ -162,14 +163,14 @@
             this.Column_bitOutput,
             this.Column_addrInput,
             this.Column_bitInput});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ChanneldataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ChanneldataGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.ChanneldataGridView.GridColor = System.Drawing.SystemColors.ControlLight;
             this.ChanneldataGridView.Location = new System.Drawing.Point(15, 61);
             this.ChanneldataGridView.Margin = new System.Windows.Forms.Padding(0);
@@ -177,7 +178,7 @@
             this.ChanneldataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.ChanneldataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.ChanneldataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ChanneldataGridView.Size = new System.Drawing.Size(385, 391);
+            this.ChanneldataGridView.Size = new System.Drawing.Size(373, 391);
             this.ChanneldataGridView.TabIndex = 13;
             // 
             // Column_addrOutput
@@ -248,7 +249,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(405, 9);
+            this.button1.Location = new System.Drawing.Point(438, 9);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 23);
             this.button1.TabIndex = 14;
@@ -258,25 +259,36 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(405, 38);
+            this.progressBar1.Location = new System.Drawing.Point(438, 32);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(100, 23);
+            this.progressBar1.Step = 1;
             this.progressBar1.TabIndex = 15;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(423, 64);
+            this.label2.Location = new System.Drawing.Point(458, 58);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 16;
             this.label2.Text = "Результат:";
             // 
+            // listBox1
+            // 
+            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(396, 75);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(175, 377);
+            this.listBox1.TabIndex = 17;
+            // 
             // VerificationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(509, 461);
+            this.ClientSize = new System.Drawing.Size(578, 461);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.button1);
@@ -318,5 +330,6 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn Column_bitInput;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
