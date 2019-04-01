@@ -116,7 +116,7 @@ namespace StandartScreens
             InitializeComponent();
             CreateLampLabels();
             CreateNameLabels(DigitPlate);
-            if (EnableForce) CreateCheckBoxs();
+            if (true) CreateCheckBoxs();
             this.Text = DigitPlate.Titl;
             startAddr = DigitPlate.StartAddr;
             serialPort = AsynchSerialPort;

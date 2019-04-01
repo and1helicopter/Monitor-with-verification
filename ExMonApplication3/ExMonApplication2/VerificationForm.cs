@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using StandartScreens;
 using UniSerialPort;
@@ -61,14 +63,14 @@ namespace ExMonApplication3
             new Info("0x0124", "2", "0x0144", "5"),
             new Info("0x0124", "1", "0x0144", "6"),
             new Info("0x0124", "0", "0x0144", "7"),
-            new Info("0x0128", "8", "0x0144", "8"),
-            new Info("0x0128", "9", "0x0144", "9"),
-            new Info("0x0128", "10", "0x0144", "10"),
-            new Info("0x0128", "11", "0x0144", "11"),
-            new Info("0x0128", "12", "0x0144", "12"),
-            new Info("0x0128", "13", "0x0144", "13"),
-            new Info("0x0128", "14", "0x0144", "14"),
-            new Info("0x0128", "15", "0x0144", "15")
+            new Info("0x0128", "0", "0x0144", "8"),
+            new Info("0x0128", "1", "0x0144", "9"),
+            new Info("0x0128", "2", "0x0144", "10"),
+            new Info("0x0128", "3", "0x0144", "11"),
+            new Info("0x0128", "4", "0x0144", "12"),
+            new Info("0x0128", "5", "0x0144", "13"),
+            new Info("0x0128", "6", "0x0144", "14"),
+            new Info("0x0128", "7", "0x0144", "15")
         };
 
         private readonly List<Info> _status3 = new List<Info>()
@@ -91,12 +93,12 @@ namespace ExMonApplication3
             new Info("0x012C", "15", "0x0148", "15")
         };
 
-        private List<Info> _statusCurrent = new List<Info>();
+	    private readonly List<Info> _statusTemp = new List<Info>();
+		private List<Info> _statusCurrent = new List<Info>();
 
         public VerificationForm(AsynchSerialPort asynchSerialPort)
         {
             InitializeComponent();
-
             _serialPort = asynchSerialPort;
             SetGrid(_status1, false);
         }
@@ -107,7 +109,7 @@ namespace ExMonApplication3
             numericUpDown2.Value = 0;
             _statusCurrent = list;
 
-            ChanneldataGridView.EditMode = editable?DataGridViewEditMode.EditOnKeystrokeOrF2:DataGridViewEditMode.EditProgrammatically;
+	        ChanneldataGridView.EditMode = DataGridViewEditMode.EditOnEnter;
             numericUpDown2.Enabled = editable;
 
             foreach (var itemInfo in list)
@@ -122,9 +124,18 @@ namespace ExMonApplication3
         {
             if (radioButton4.Checked)
             {
-                if (ChanneldataGridView.RowCount > numericUpDown2.Value)
-                    ChanneldataGridView.Rows.RemoveAt(ChanneldataGridView.RowCount - 1);
-                else if(ChanneldataGridView.RowCount < numericUpDown2.Value)
+				if(_statusTemp.Count == 0)
+					_statusCurrent.ForEach(info=>_statusTemp.Add(new Info(info.AddrInput, info.BitInput, info.AddrOutput, info.BitOutput)));
+	            _statusCurrent = _statusTemp;
+
+
+				if (ChanneldataGridView.RowCount > numericUpDown2.Value)
+	            {
+		            ChanneldataGridView.Rows.RemoveAt(ChanneldataGridView.RowCount - 1);
+					if(_statusTemp.Count != 0)
+						_statusTemp.Remove(_statusTemp.Last());
+	            }
+				else if(ChanneldataGridView.RowCount < numericUpDown2.Value)
                 {
                     ChanneldataGridView.Rows.Add("0x0000", _bit[0], "0x0000", _bit[0]);
 
@@ -136,11 +147,11 @@ namespace ExMonApplication3
 
         private class Info
         {
-            public string AddrInput { get; }
-            public string BitInput { get; }
-            public string AddrOutput { get; }
-            public string BitOutput { get; }
-            public int Value { get; set; }
+            public string AddrInput { get; set; }
+            public string BitInput { get; set; }
+			public string AddrOutput { get; set; }
+			public string BitOutput { get; set; }
+			public int Value { get; set; }
 
             public Info(string addrInput, string bitInput, string addrOutput, string bitOutput)
             {
@@ -159,27 +170,36 @@ namespace ExMonApplication3
 
         private void radioButton2_Click(object sender, EventArgs e)
         {
-            SetGrid(_status2, false);
+			SetGrid(_status2, false);
         }
 
         private void radioButton3_Click(object sender, EventArgs e)
         {
-            SetGrid(_status3, false);
+			SetGrid(_status3, false);
         }
 
         private void radioButton4_Click(object sender, EventArgs e)
         {
+	        numericUpDown2.Enabled = true;
             SetGrid(_statusCurrent, true);
         }
 
         readonly Dictionary<string, ushort> _testListInput = new Dictionary<string, ushort>();
         readonly Dictionary<string, ushort> _testListOutput = new Dictionary<string, ushort>();
 
-        private int _cycle;
+		readonly Dictionary<string, bool> _writeStatus = new Dictionary<string, bool>();
+	    readonly Dictionary<string, bool> _readStatus = new Dictionary<string, bool>();
+	    readonly Dictionary<string, bool> _readInput = new Dictionary<string, bool>();
+	    readonly Dictionary<string, bool> _readOutput = new Dictionary<string, bool>();
+
+	    readonly Dictionary<string, ushort> _tempValueOutput = new Dictionary<string, ushort>();
+
+		private int _cycle;
 
         private void button1_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
+	        _stop = false;
+			listBox1.Items.Clear();
             UpdateListBoxInvoke("Start...");
             //Формирование списка под ошибки
             foreach (var current in _statusCurrent)
@@ -190,45 +210,284 @@ namespace ExMonApplication3
             UpdateEnableToolsInvoke(false);
 
             //Установить параметры прогресс бара
-            progressBar1.Maximum = (int)numericUpDown1.Value * 2;
+            progressBar1.Maximum = (int)numericUpDown1.Value;
             progressBar1.Value = 0;
 
             _testListInput.Clear();
             _testListOutput.Clear();
-            foreach (var current in _statusCurrent)
+	        _writeStatus.Clear();
+	        _readStatus.Clear();
+	        _readOutput.Clear();
+	        _readInput.Clear();
+	        _tempValueOutput.Clear();
+			foreach (var current in _statusCurrent)
             {
                 if (!_testListInput.ContainsKey(current.AddrInput))
                     _testListInput.Add(current.AddrInput, 0);
-                if (!_testListOutput.ContainsKey(current.AddrOutput))
-                    _testListOutput.Add(current.AddrOutput, 0);
-            }
+	            if (!_testListOutput.ContainsKey(current.AddrOutput))
+	            {
+					_testListOutput.Add(current.AddrOutput, 0);
+				}
+	            if (!_writeStatus.ContainsKey(current.AddrOutput))
+	            {
+		            _writeStatus.Add(current.AddrOutput, false);
+				}
+	            if (!_readStatus.ContainsKey(current.AddrOutput))
+	            {
+		            _readStatus.Add(current.AddrOutput, false);
+	            }
+	            if (!_readInput.ContainsKey(current.AddrInput))
+	            {
+		            _readInput.Add(current.AddrInput, false);
+				}
+				if (!_readOutput.ContainsKey(current.AddrOutput))
+				{
+					_readOutput.Add(current.AddrOutput, false);
+				}
+	            if (!_tempValueOutput.ContainsKey(current.AddrOutput))
+	            {
+		            _tempValueOutput.Add(current.AddrOutput, 0);
+	            }
+			}
 
-            OneCycle();
+			CycleCheack xxxCycleCheack = Start;
+			xxxCycleCheack.Invoke();
+
         }
 
-        private bool _statusSet;
+		delegate void CycleCheack();
+
+	    private void Start()
+	    {
+		    //Устанавливаем значаения 
+		    //Сброс
+		    foreach (var outputAddr in _testListOutput)
+		    {
+				SetOutput(false, outputAddr.Key);
+			}
+		}
 
         private void OneCycle()
         {
-            if(_cycle < numericUpDown1.Value * 2)
-                RequestOutput();
-            else
-            {
-                _cycle = 0;
-                MessageVerification();
-            }
-        }
+			//Получаем значение 
+			GetInput();
+	        GetOutput();//Сравниваю как получу все данные
+		}
 
-        private void UpdateEnableTools(bool str)
+		//Сравниваем
+		private void Varification()
+		{
+			if (!_readInput.ContainsValue(false) && !_readOutput.ContainsValue(false))
+			{
+				foreach (var current in _statusCurrent)
+				{
+					if (_tempValueOutput[current.AddrOutput] != _testListOutput[current.AddrOutput])
+					{
+						//Добавить ошибку
+					}
+					//Получаем значение бита
+					var input = (_testListInput[current.AddrInput] & (1 << Convert.ToUInt16(current.BitInput))) >> Convert.ToUInt16(current.BitInput);
+					var output = (_testListOutput[current.AddrOutput] & (1 << Convert.ToUInt16(current.BitOutput))) >> Convert.ToUInt16(current.BitOutput);
+
+					if (input != output)
+					{
+						current.Value++;
+					}
+
+					_readStatus[current.AddrOutput] = true;
+				}
+			}
+
+			//Проверка
+			if (!_readStatus.ContainsValue(false))
+			{
+				foreach (var status in _readInput.Keys.ToList())
+				{
+					_readInput[status] = false;
+				}
+
+				foreach (var status in _readOutput.Keys.ToList())
+				{
+					_readOutput[status] = false;
+				}
+
+				foreach (var status in _readStatus.Keys.ToList())
+				{
+					_readStatus[status] = false;
+				}
+
+				CycleCheack xxxCycleCheack = Start;
+				xxxCycleCheack.Invoke();
+			}
+		}
+
+		//Чтение значений
+		private void GetInput()
+	    {
+		    foreach (var addr in AddrInput())
+		    {
+			    _serialPort.GetDataRTU(addr, 1, InputAnswer, addr);
+		    }
+		}
+
+	    private IEnumerable<ushort> AddrInput()
+	    {
+		    foreach (var input in _testListInput)
+		    {
+			    yield return ushort.Parse(input.Key.Substring(2), NumberStyles.HexNumber);
+		    }
+	    }
+
+		private void InputAnswer(bool dataOk, ushort[] paramRtu, object param)
+	    {
+		    if (dataOk)
+		    {
+			    var str = "0x" + Convert.ToUInt16(param).ToString("X4");
+			    if (_testListInput.ContainsKey(str))
+			    {
+				    _testListInput[str] = paramRtu[0];
+				    _readInput[str] = true;
+			    }
+			}
+
+		    Varification();
+		}
+
+		private void GetOutput()
+	    {
+		    foreach (var addr in AddrOutput())
+		    {
+			    _serialPort.GetDataRTU((ushort) (addr + 3), 1, OutputAnswer, addr);
+		    }
+	    }
+
+		private IEnumerable<ushort> AddrOutput()
+	    {
+		    foreach (var output in _testListOutput)
+		    {
+			    yield return ushort.Parse(output.Key.Substring(2), NumberStyles.HexNumber);
+		    }
+	    }
+
+	    private void OutputAnswer(bool dataOk, ushort[] paramRtu, object param)
+	    {
+		    if (dataOk)
+		    {
+			    var str = "0x" + Convert.ToUInt16(param).ToString("X4");
+			    if (_testListOutput.ContainsKey(str))
+			    {
+					_testListOutput[str] = paramRtu[0];
+				    _readOutput[str] = true;
+			    }
+			}
+
+		    Varification();
+		}
+		//Установить
+		private void SetOutput(bool mode, string addrOutput) //mode: false - unset, true - set
+	    {
+		    var addr = ushort.Parse(addrOutput.Substring(2), NumberStyles.HexNumber);
+
+
+		    CalcDigitMasks(_testListOutput[addrOutput], addrOutput, mode, out var maskOr, out var maskAnd);
+
+		    var param = new { Mode = mode, Addr = addr, MaskOr = maskOr, MaskAnd = maskAnd };
+
+			_serialPort.SetDataRTU((ushort) (addr + 1), AnswerSet, param, maskOr, maskAnd);
+		}
+
+		private void AnswerSet(bool dataOk, ushort[] paramRtu, dynamic param)
+	    {
+		    if (dataOk)
+		    {
+				if (_stop)return; 
+				Thread.Sleep(250);
+
+			    bool mode = param.Mode;
+			    ushort valAddr = param.Addr;
+
+				string addr = "0x" + Convert.ToUInt16(valAddr).ToString("X4");
+			    _tempValueOutput[addr] = param.MaskOr;
+			    //Читаю и сравниваю
+
+				if (mode)
+					_writeStatus[addr] = true;
+
+			    if (!_writeStatus.ContainsValue(false))
+			    {
+				    _cycle++;
+				    foreach (var status in _writeStatus.Keys.ToList())
+				    {
+					    _writeStatus[status] = false;
+				    }
+
+				    UpdateLoadDataProgressBarInvoke();
+
+					if(_cycle < numericUpDown1.Value)
+						OneCycle();
+			    }
+			    else
+			    {
+					if(_cycle < numericUpDown1.Value)
+						SetOutput(!mode, addr);
+				}
+
+				if (_cycle >= numericUpDown1.Value)
+			    {
+					//Резульат
+				    MessageVerification();
+					//Сброс всех состояний
+					UpdateEnableToolsInvoke(true);
+				    _cycle = 0;
+					UpdateLoadDataProgressBarInvoke();
+				}
+		    }
+	    }
+
+
+	    //Расчет
+	    private void CalcDigitMasks(ushort value, string addrOutput, bool mode, out ushort maskOr, out ushort maskAnd)
+	    {
+		    ushort m1 = value;
+		    ushort m2 = 0x0000;
+
+		    foreach (var current in _statusCurrent)
+		    {
+			    if (current.AddrOutput == addrOutput)
+			    {
+				    if (mode)
+				    {
+					    m1 = (ushort) (m1 | (1 << Convert.ToUInt16(current.BitOutput)));
+				    }
+				    else
+				    {
+						m2 = (ushort)(m2 | (1 << Convert.ToUInt16(current.BitOutput)));
+				    }
+			    }
+			}
+
+			maskOr = m1;
+		    maskAnd = (ushort)((m2) ^ 0xFFFF);
+	    }
+
+
+
+		private void UpdateEnableTools(bool str)
         {
             numericUpDown1.Enabled = str;
+	        if (str && radioButton4.Checked)
+		        numericUpDown2.Enabled = true;
+	        else
+		        numericUpDown2.Enabled = false;
             radioButton1.Enabled = str;
             radioButton2.Enabled = str;
             radioButton3.Enabled = str;
             radioButton4.Enabled = str;
-        }
+	        button1.Enabled = str;
+	        button2.Enabled = !str;
+		}
 
-        private delegate void BoolParamDelegate(bool str);
+		private delegate void BoolParamDelegate(bool str);
 
         private void UpdateEnableToolsInvoke(bool str)
         {
@@ -264,74 +523,20 @@ namespace ExMonApplication3
                     }
                 }
                 UpdateListBoxInvoke("Finish");
-                MessageBox.Show(@"Error", @"Finish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(new Form { TopMost = true }, @"Error", @"Finish", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
                 UpdateListBoxInvoke("No Error");
                 UpdateListBoxInvoke("Finish");
-                MessageBox.Show(@"Succsess", @"Finish", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(new Form { TopMost = true }, @"Succsess", @"Finish", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             //Отобразить элементы управления
             UpdateEnableToolsInvoke(true);
         }
 
-        private IEnumerable<ushort> AddrInput()
-        {
-            foreach (var input in _testListInput)
-            {
-                yield return ushort.Parse(input.Key.Substring(2), NumberStyles.HexNumber);
-            }
-        }
 
-        private IEnumerable<ushort> AddrOutput()
-        {
-            foreach (var output in _testListOutput)
-            {
-                yield return ushort.Parse(output.Key.Substring(2), NumberStyles.HexNumber);
-            }
-        }
-
-
-        private void DataRecievedInput(bool dataOk, ushort[] paramRtu, object param)
-        {
-            if (dataOk)
-            {
-                ReadInput();
-                var str = "0x" + Convert.ToUInt16(param).ToString("X4");
-                if (_testListInput.ContainsKey(str))
-                {
-                    _testListInput[str] = paramRtu[0];
-                }
-                if (ReadyInput)
-                {
-                    _cycle++;
-                    Varification();
-                    _statusSet = !_statusSet;
-                    OneCycle();
-                }
-            }
-        }
-
-        private void Varification()
-        {
-            //Проверка
-            foreach (var current in _statusCurrent)
-            {
-                //Получаем значение бита
-                var input = (_testListInput[current.AddrInput] & (1 << Convert.ToUInt16(current.BitInput))) >> Convert.ToUInt16(current.BitInput);
-                var output = (_testListOutput[current.AddrOutput] & (1 << Convert.ToUInt16(current.BitOutput))) >> Convert.ToUInt16(current.BitOutput);
-                
-                if (input != output)
-                {
-                    current.Value++;
-                }
-            }
-            //Обновление прогрессбара
-            UpdateLoadDataProgressBarInvoke();
-        }
-
-        private void UpdateLoadDataProgressBar()
+	    private void UpdateLoadDataProgressBar()
         {
             progressBar1.Value = _cycle;
         }
@@ -343,116 +548,39 @@ namespace ExMonApplication3
             Invoke(new NoParamDelegate(UpdateLoadDataProgressBar));
         }
 
-        private void DataRecievedOutput(bool dataOk, ushort[] paramRtu, object param)
-        {
-            if (dataOk)
-            {
-                ReadOutput();
-                var str = "0x" + Convert.ToUInt16(param).ToString("X4");
-                if (_testListOutput.ContainsKey(str))
-                {
-                    _testListOutput[str] = paramRtu[0];
-                    var value = CalcDigitMasks(_testListOutput[str], str, _statusSet);
-                    SetOutput(value, str);
-                }
-            }
-        }
+	    bool _stop;
 
-        private void SetOutput(ushort value, string addrOutput)
-        {
-            foreach (var output in _testListOutput)
-            {
-                if (output.Key == addrOutput)
-                {
-                    var addr = ushort.Parse(output.Key.Substring(2), NumberStyles.HexNumber);
-                    _serialPort.SetDataRTU(addr, SetOutput, output.Key, value);
-                }
-            }
-        }
+		private void button2_Click(object sender, EventArgs e)
+		{
+			_stop = true;
+			_cycle = 0;
+			UpdateListBoxInvoke("Stop...");
+			MessageVerification();
+			UpdateEnableToolsInvoke(true);
+			UpdateLoadDataProgressBarInvoke();
+		}
 
-        private void SetOutput(bool dataOk, ushort[] paramRtu, object param)
-        {
-            if (dataOk)
-            {
-                if (ReadyOutput)
-                {
-                    Requestinput();
-                }
-            }
-        }
+		private void ChanneldataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+		{
+			var columnIndex = e.ColumnIndex;
+			var rowIndex = e.RowIndex;
 
-
-        private void Requestinput()
-        {
-            ReadyInput = false;
-            CountInput = 0;
-            foreach (var addr in AddrInput())
-            {
-                _serialPort.GetDataRTU(addr, 1, DataRecievedInput, addr);
-            }
-        }
-
-        private bool ReadyInput { get; set; }
-        private int CountInput { get; set; }
-
-        private void ReadInput()
-        {
-            CountInput++;
-            if (CountInput == _testListInput.Count)
-            {
-                CountInput = 0;
-                ReadyInput = true;
-            }
-            else
-            {
-                ReadyInput = false;
-            }
-        }
-
-        private void RequestOutput()
-        {
-            ReadyOutput = false;
-            CountOutput = 0;
-            foreach (var addr in AddrOutput())
-            {
-                _serialPort.GetDataRTU(addr, 1, DataRecievedOutput, addr);
-            }
-        }
-
-        private bool ReadyOutput { get; set; }
-        private int CountOutput { get; set; }
-
-        private void ReadOutput()
-        {
-            CountOutput++;
-            if (CountOutput == _testListOutput.Count)
-            {
-                CountOutput = 0;
-                ReadyOutput = true;
-            }
-            else
-            {
-                ReadyOutput = false;
-            }
-        }
-
-        private ushort CalcDigitMasks(ushort value, string addrOutput, bool mode)
-        {
-            foreach (var current in _statusCurrent)
-            {
-                if (current.AddrOutput == addrOutput)
-                {
-                    if (!mode)
-                    {
-                        value = (ushort) (value & (0xFFFF ^ (1 << Convert.ToUInt16(current.BitOutput))));
-                    }
-                    else
-                    {
-                        value = (ushort)(value | (1 << Convert.ToUInt16(current.BitOutput)));
-                    }
-                }
-            }
-            return value;
-        }
-    }
+			if (columnIndex == 0)
+			{
+				_statusCurrent[rowIndex].AddrOutput = ChanneldataGridView[columnIndex, rowIndex].Value.ToString();
+			}
+			else if (columnIndex == 1)
+			{
+				_statusCurrent[rowIndex].BitOutput = ChanneldataGridView[columnIndex, rowIndex].Value.ToString();
+			}
+			else if (columnIndex == 2)
+			{
+				_statusCurrent[rowIndex].AddrInput = ChanneldataGridView[columnIndex, rowIndex].Value.ToString();
+			}
+			else if (columnIndex == 3)
+			{
+				_statusCurrent[rowIndex].BitInput = ChanneldataGridView[columnIndex, rowIndex].Value.ToString();
+			}
+		}
+	}
 }

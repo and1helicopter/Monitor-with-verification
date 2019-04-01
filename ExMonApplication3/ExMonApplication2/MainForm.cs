@@ -56,7 +56,7 @@ namespace ExMonApplication2
                 jogLabelButton.Title = TextsParams.ParameterName(111);
                 angleLabelButton.Title = TextsParams.ParameterName(119);
                 digitTitle.Text = TextsParams.ParameterName(108);
-                verificationlabelButton.Title = TextsParams.ParameterName(123);
+                verificationlabelButton.Title = TextsParams.ParameterName(111);
             }
             catch (Exception e)
             {
